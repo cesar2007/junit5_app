@@ -6,9 +6,12 @@ import org.junit.jupiter.api.condition.*;
 
 import java.math.BigDecimal;
 import java.sql.SQLOutput;
+import java.util.Map;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.*;
+
 //@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CuentaTest {
 
@@ -177,5 +180,61 @@ class CuentaTest {
   @EnabledIfSystemProperty(named = "java.version", matches="21.0.4")
   void testJavaVersion() {
 
+  }
+
+  @Test
+  @DisabledIfSystemProperty(named = "os.arch", matches = ".*32.*")
+  void testSolo64(){
+
+  }
+
+  @Test
+  @EnabledIfSystemProperty(named = "os.arch", matches = ".*32.*")
+  void testNo64(){
+
+  }
+
+  @Test
+  @EnabledIfSystemProperty(named = "user.country", matches = "US")
+  void name() {
+  }
+
+  @Test
+  @EnabledIfSystemProperty(named = "ENV", matches = "dev")
+  void testDev() {
+  }
+
+  @Test
+  void imprimirVariablesAmbiente() {
+    Map<String, String> getenv = System.getenv();
+    getenv.forEach((k, v) -> System.out.println(k + " = " + v ));
+  }
+
+  @Test
+  @EnabledIfEnvironmentVariable(named = "JAVA_HOME", matches = ".*jdk-17.*")
+  void testJavaHome(){
+  }
+
+  @Test
+  @EnabledIfEnvironmentVariable(named = "NUMBER_OF_PROCESSORS", matches = "13")
+  void testProcesadores(){
+  }
+
+  @Test
+  @EnabledIfEnvironmentVariable(named = "ENVIRONMENT", matches = "dev")
+  void testEnv() {
+  }
+
+  // ejecutar esta prueba cuando estemos en desarrollo
+  @Test
+  @DisplayName("test Saldo Cuenta Dev")
+  void testSaldoCuentaDev() {
+    boolean esDev = "dev".equals(System.getProperty("ENV"));
+    assumeTrue(esDev);
+    cuenta = new Cuenta("César", new BigDecimal("1000.12345"));
+    assertNotNull(cuenta.getSaldo());
+    assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
+    assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
+    assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
   }
 }
