@@ -53,7 +53,7 @@ public class Cuenta {
 
   @Override
   public boolean equals(Object obj) {
-    if(!(obj instanceof  Cuenta)){
+    if(!(obj instanceof Cuenta)){
       return false;
     }
     Cuenta c = (Cuenta)obj;
