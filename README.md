@@ -88,5 +88,5 @@ Mockito se utiliza para:
 1. **Clonar el repositorio**:
    ```bash
    git clone https://github.com/cesar2007/junit5_app.git
-   cd tu-repositorio
+   cd junit5_app
 
