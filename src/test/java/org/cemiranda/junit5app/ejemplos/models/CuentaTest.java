@@ -26,7 +26,7 @@ class CuentaTest {
   @BeforeEach
   void initMetodoTest() {
     this.cuenta = new Cuenta("Cesar", new BigDecimal("1000.12345"));
-    System.out.println("iniciando el método.");
+    System.out.println("iniciando el método de prueba");
   }
 
   @AfterEach
@@ -50,7 +50,7 @@ class CuentaTest {
     @Test
     @DisplayName("el nombre")
     void testNombreCuenta() {
-      Cuenta cuenta = new Cuenta("César", new BigDecimal("1000.12345"));
+      //Cuenta cuenta = new Cuenta("César", new BigDecimal("1000.12345"));
       cuenta.setPersona("César");
       String esperado = "César";
       String real = cuenta.getPersona();
@@ -63,7 +63,7 @@ class CuentaTest {
     @Test
     @DisplayName("el saldo que no sea null, mayor que cero, valor esperado")
     void testSaldoCuenta() {
-      cuenta = new Cuenta("César", new BigDecimal("1000.12345"));
+      // cuenta = new Cuenta("César", new BigDecimal("1000.12345"));
       assertNotNull(cuenta.getSaldo());
       assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
       assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
@@ -101,7 +101,6 @@ class CuentaTest {
 
     @Test
     void testTransferirDineroCuentas() {
-
       Cuenta cuentaOrigen = new Cuenta("Jhon Doe donador", new BigDecimal("2500"));
       Cuenta cuentaDestino = new Cuenta("Gina Doe receptora", new BigDecimal("1500"));
 
@@ -114,8 +113,6 @@ class CuentaTest {
     }
   }
 
-
-
   @Test
   void dineroInsuficienteException() {
     Exception exception = assertThrows(DineroInsuficienteException.class, () -> {
@@ -125,8 +122,6 @@ class CuentaTest {
     String esperado = "Dinero insuficiente";
     assertEquals(esperado, actual);
   }
-
-
 
   @Test
 //  @Disabled
@@ -141,7 +136,7 @@ class CuentaTest {
     bbva.addCuenta(cuentaDestino);
     bbva.setNombre("BBVA");
     bbva.transferir(cuentaOrigen, cuentaDestino, new BigDecimal(400));
-    assertEquals("1900", cuentaDestino.getSaldo().toPlainString());
+    assertEquals("1800", cuentaDestino.getSaldo().toPlainString());
     assertEquals("2100", cuentaOrigen.getSaldo().toPlainString());
 
     assertEquals(2, bbva.getCuentas().size());
@@ -165,7 +160,6 @@ class CuentaTest {
 //            .equals("Cesar")))
 //    );
   }
-
 
   @Nested
   class SistemaOperativoTest {
@@ -231,7 +225,7 @@ class CuentaTest {
     }
 
     @Test
-    @EnabledIfSystemProperty(named = "user.country", matches = "US")
+    @EnabledIfSystemProperty(named = "user.country", matches = "MX")
     void name() {
     }
 
@@ -241,7 +235,7 @@ class CuentaTest {
     }
   }
 
-
+  @Nested
   class VariableAmbienteTest {
     @Test
     void imprimirVariablesAmbiente() {
@@ -355,11 +349,12 @@ class CuentaTest {
       assertNotNull(cuenta.getSaldo());
       assertTrue(cuenta.getSaldo().compareTo(BigDecimal.ZERO) > 0);
     }
+    static List<String> montoList () {
+      return Arrays.asList("100", "200", "300", "500", "700", "1000");
+    }
+
   }
 
-  static List<String> montoList () {
-    return Arrays.asList("100", "200", "300", "500", "700", "1000");
-  }
 
 
 }

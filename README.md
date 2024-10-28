@@ -1,6 +1,10 @@
-# JUnit 5 Unit Testing in Java 21 🚀
+# JUnit 5 y Mockito en Java 21 🚀
 
-Este repositorio contiene ejemplos de **pruebas unitarias** utilizando **JUnit 5** y Java 21. A través de varios casos de prueba, se cubren aspectos esenciales de las funcionalidades de JUnit, como el ciclo de vida de pruebas, manejo de excepciones, y diversas anotaciones importantes.
+Este repositorio contiene ejemplos prácticos de **pruebas unitarias** utilizando **JUnit 5** y **Mockito** en un entorno de Java 21. A través de diferentes casos de prueba, se muestra cómo integrar JUnit para validar la lógica de negocio y cómo emplear Mockito para crear **mocks** y realizar pruebas aisladas de dependencias.
+
+El objetivo es demostrar cómo estas herramientas facilitan el desarrollo orientado a pruebas (TDD) en aplicaciones empresariales y simplifican el ciclo de vida de las pruebas.
+
+---
 
 ## 📋 Contenido
 - [Requisitos](#requisitos)
@@ -15,20 +19,32 @@ Este repositorio contiene ejemplos de **pruebas unitarias** utilizando **JUnit 5
 ## ✅ Requisitos
 - **Java**: 21 o superior
 - **JUnit**: 5.x
-- **Maven** o **Gradle** (opcional, para la gestión de dependencias)
-- **Git**: Para clonar este repositorio
+- **Mockito**: 4.x o superior
+- **Maven** o **Gradle** (opcional para gestionar dependencias)
+- **Git**: Para clonar y administrar el repositorio
 
 ---
 
 ## 🌟 Características principales
-- Uso del ciclo de vida completo de JUnit: `@BeforeAll`, `@AfterAll`, `@BeforeEach`, `@AfterEach`.
-- Pruebas parametrizadas y pruebas que dependen de propiedades del sistema.
-- Manejo de excepciones con `assertThrows`.
-- Validación de múltiples condiciones con `assertAll`.
-- Uso de `@DisplayName` para una mejor documentación de las pruebas.
-- Integración con GitHub como repositorio remoto.
+
+- **JUnit 5**:
+    - Uso del ciclo de vida completo (`@BeforeAll`, `@AfterEach`).
+    - Validación de excepciones y condiciones múltiples con `assertThrows` y `assertAll`.
+    - Pruebas parametrizadas para validar diferentes casos con un solo método.
+    - Mejora en la documentación de pruebas con `@DisplayName`.
+
+- **Mockito**:
+    - Creación de mocks para aislar dependencias en las pruebas.
+    - Configuración de comportamiento con `when(...).thenReturn(...)`.
+    - Verificación de interacciones con `verify(...)`.
 
 ---
+
+## 📌 ¿Qué es JUnit?
+
+JUnit es un framework de pruebas unitarias para Java, utilizado para validar que cada unidad del código (por ejemplo, métodos y clases) funcione correctamente. Facilita la creación de pruebas automatizadas, mejorando la calidad del software y detectando errores de manera temprana en el desarrollo.
+
+El ciclo de vida de las pruebas en JUnit se organiza con **anotaciones** como:
 
 ## 📝 Anotaciones de JUnit 5
 | Anotación                  | Descripción                                                             |
@@ -44,16 +60,33 @@ Este repositorio contiene ejemplos de **pruebas unitarias** utilizando **JUnit 5
 
 ---
 
+## 🔍 ¿Qué es Mockito?
+
+Mockito es una librería para **simular objetos** en las pruebas unitarias. Su propósito principal es aislar el componente bajo prueba al crear **mocks** de sus dependencias, asegurando que solo se evalúe la lógica interna del componente sin involucrar otras partes del sistema.
+
+Mockito se utiliza para:
+
+- **Simular dependencias** complejas o lentas, como bases de datos o servicios externos.
+- **Definir comportamiento** con `when(...).thenReturn(...)` para devolver valores esperados.
+- **Verificar interacciones** entre objetos con `verify(...)`.
+
+---
+
+
 ## 📂 Ejemplos de pruebas
 
-### 1. **Ciclo de vida de las pruebas**
-```java
-@BeforeAll
-static void initAll() {
-    System.out.println("Inicializando las pruebas...");
-}
+1. **Prueba con JUnit:**  
+   Validación de un método que filtra resultados en base al nombre, asegurando que las búsquedas devuelvan los resultados esperados.
 
-@AfterEach
-void tearDown() {
-    System.out.println("Finalizando cada prueba.");
-}
+2. **Uso de Mockito:**  
+   Simulación de una dependencia (repositorio) para aislar la lógica de negocio del servicio. En este ejemplo, se utiliza un **mock** para evitar llamadas reales a la base de datos y se verifica que el servicio interactúe correctamente con la dependencia.
+
+---
+
+## ▶️ Cómo ejecutar las pruebas
+
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/tu-usuario/tu-repositorio.git
+   cd tu-repositorio
+
